@@ -1,9 +1,8 @@
-﻿using Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 
 namespace ApplicationCore.DTO;
 
-public class ReceiptDto
+public class ReceiptUploadDto
 {
     public Guid Id { get; set; }
     public IFormFile ImageFile { get; set; }

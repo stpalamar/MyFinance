@@ -48,8 +48,16 @@ public class TransactionService : ITransactionService
 
     public TransactionDto AddTransaction(TransactionDto transaction)
     {
-        var account = _context.Accounts
-            .First(a => a.User.Id == _user.Id && a.Id == transaction.AccountId);
+        
+        var accountWhere = _context.Accounts
+            .Where(a => a.User.Id == _user.Id && a.Id == transaction.AccountId);
+
+        if (accountWhere.IsNullOrEmpty())
+        {
+            throw new NotFoundAccountException();
+        }
+        
+        var account = accountWhere.First();
 
         var newTransaction = new Transaction
         {

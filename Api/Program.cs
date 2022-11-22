@@ -22,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddTransient<IUserService, UserService>();
+builder.Services.AddTransient<IReceiptService, ReceiptService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<IPasswordHasher, PasswordHasher>();
 builder.Services.AddLogging();

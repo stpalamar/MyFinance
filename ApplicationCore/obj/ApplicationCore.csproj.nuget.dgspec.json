@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj": {}
+    "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj": {}
   },
   "projects": {
-    "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj": {
+    "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj",
+        "projectUniqueName": "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj",
         "projectName": "ApplicationCore",
-        "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj",
+        "projectPath": "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj",
         "packagesPath": "C:\\Users\\Stanislav\\.nuget\\packages\\",
-        "outputPath": "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\obj\\",
+        "outputPath": "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Stanislav\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -26,8 +26,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj"
+              "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -71,18 +71,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Stanislav\\.nuget\\packages\\",
-        "outputPath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\obj\\",
+        "outputPath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Stanislav\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -140,7 +140,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
         }
       }
     }

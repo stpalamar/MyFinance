@@ -23,7 +23,7 @@ public class ReceiptService : IReceiptService
         _user = _context.Users.First(u => u.Email == email);
     }
 
-    public void AddReceiptToTransaction(ReceiptDto receiptDto, Guid transactionId)
+    public void AddReceiptToTransaction(ReceiptUploadDto receiptUploadDto, Guid transactionId)
     {
         if (_context.Transactions
             .Include("Account")
@@ -36,13 +36,13 @@ public class ReceiptService : IReceiptService
         var transaction =  _context.Transactions
             .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId);
 
-        if (receiptDto.ImageFile.Length <= 0)
+        if (receiptUploadDto.ImageFile.Length <= 0)
         {
             throw new Exception("File is empty");
         };
         using var ms = new MemoryStream();
         {
-            receiptDto.ImageFile.CopyTo(ms);
+            receiptUploadDto.ImageFile.CopyTo(ms);
             var fileBytes = ms.ToArray();
             var newReceipt = new Receipt()
             {
@@ -55,22 +55,18 @@ public class ReceiptService : IReceiptService
         }
     }
     
-    // public ReceiptDto GetReceiptOfTransaction(Guid transactionId)
-    // {
-    //     if (_context.Transactions
-    //         .Include("Account")
-    //         .Where(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
-    //         .IsNullOrEmpty())
-    //     {
-    //         throw new NotFoundTransactionException();
-    //     }
-    //
-    //     var receipt = _context.Transactions
-    //         .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
-    //         .Receipt;
-    //     return ReceiptDto
-    //     {
-    //         id
-    //     };
-    // }
+    public Receipt GetReceiptByTransactionId(Guid transactionId)
+    {
+        if (_context.Transactions
+            .Include("Account")
+            .Where(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
+            .IsNullOrEmpty())
+        {
+            throw new NotFoundTransactionException();
+        }
+    
+        return _context.Transactions
+            .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
+            .Receipt;
+    }
 }
