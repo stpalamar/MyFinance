@@ -1,0 +1,15 @@
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\bin\Debug\net6.0\ApplicationCore.deps.json
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\bin\Debug\net6.0\ApplicationCore.dll
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\bin\Debug\net6.0\ApplicationCore.pdb
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\bin\Debug\net6.0\Infrastructure.dll
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\bin\Debug\net6.0\Infrastructure.pdb
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.csproj.AssemblyReference.cache
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.GeneratedMSBuildEditorConfig.editorconfig
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.AssemblyInfoInputs.cache
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.AssemblyInfo.cs
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.csproj.CoreCompileInputs.cache
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.csproj.CopyComplete
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.dll
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\refint\ApplicationCore.dll
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ApplicationCore.pdb
+E:\Development\dotnet-projects\MyFinance\ApplicationCore\obj\Debug\net6.0\ref\ApplicationCore.dll
