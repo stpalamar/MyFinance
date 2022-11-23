@@ -51,6 +51,10 @@ public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger)
                     problem.Status = (int)HttpStatusCode.NotFound;
                     problem.Title = "Account not found";
                     break;
+                case NoReceiptOfTransactionException _:
+                    problem.Status = (int)HttpStatusCode.NotFound;
+                    problem.Title = "Receipt not found";
+                    break;
             }
 
             string json = JsonSerializer.Serialize(problem);

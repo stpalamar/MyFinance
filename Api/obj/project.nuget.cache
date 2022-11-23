@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Azra0O/ZJ1Dj5h5YrTfXQbbotetrdaTab5/VsmDRqCQeAja1QNBF8x1e1OBvVCBU4NPn0RZgxPyF3Iis/RlKOQ==",
+  "dgSpecHash": "Aw2QtgbpI99J0FtgVuGjZOs964UE09ni/Zg6GVhdvWDResYHaNlxizDxyZGsNueq7NhYCWOxyfgESOY4L6Ic7Q==",
   "success": true,
-  "projectFilePath": "D:\\Development\\rider-projects\\MyFinance\\Api\\Api.csproj",
+  "projectFilePath": "E:\\Development\\dotnet-projects\\MyFinance\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stanislav\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

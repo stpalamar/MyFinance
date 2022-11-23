@@ -20,7 +20,7 @@ public class ReceiptsController : ControllerBase
     }
     
     [HttpPost("{id}")]
-    public IActionResult AddReceiptToTransaction(ReceiptUploadDto receiptUploadDto, Guid id)
+    public IActionResult AddReceiptToTransaction([FromForm] ReceiptUploadDto receiptUploadDto, Guid id)
     {
         _receiptService.AddReceiptToTransaction(receiptUploadDto, id);
         return Ok();

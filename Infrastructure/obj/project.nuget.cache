@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "FOngVVmVihuIoWfBos5pPlbY5J+T6AgKU0hSEdN8t5L50R+fBMxYc6myhyKVvK8/U6AhgoAOCu4fzED7OPLiEA==",
+  "dgSpecHash": "hAXA3N/1jXiL4LmWJ6mpzBgq7PgtKtez10qtkZtQ9gNZ2/fVgSqt+fc+rzDGCcYzi/mS+hqCw+i/P5UNkK54KQ==",
   "success": true,
-  "projectFilePath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Stanislav\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\Stanislav\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

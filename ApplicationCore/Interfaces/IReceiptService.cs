@@ -5,6 +5,6 @@ namespace ApplicationCore.Interfaces;
 
 public interface IReceiptService
 {
-    void AddReceiptToTransaction(ReceiptUploadDto receiptDto, Guid transactionId);
-    Receipt GetReceiptByTransactionId(Guid id);
+    void AddReceiptToTransaction(ReceiptUploadDto receiptUploadDto, Guid transactionId);
+    ReceiptDto GetReceiptByTransactionId(Guid id);
 }

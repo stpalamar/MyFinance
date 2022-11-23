@@ -32,30 +32,30 @@ public class ReceiptService : IReceiptService
         {
             throw new NotFoundTransactionException();
         }
-        
-        var transaction =  _context.Transactions
-            .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId);
 
-        if (receiptUploadDto.ImageFile.Length <= 0)
+        if (receiptUploadDto.ImageData.Length <= 0)
         {
             throw new Exception("File is empty");
-        };
+        }
+
+        ;
         using var ms = new MemoryStream();
         {
-            receiptUploadDto.ImageFile.CopyTo(ms);
+            receiptUploadDto.ImageData.CopyTo(ms);
             var fileBytes = ms.ToArray();
             var newReceipt = new Receipt()
             {
                 ImageData = fileBytes,
             };
             var addedReceipt = _context.Receipts.Add(newReceipt);
+            var transaction = _context.Transactions
+                .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
+                .Receipt = addedReceipt.Entity;
             _context.SaveChanges();
-                   
-            transaction.Receipt = addedReceipt.Entity;
         }
     }
-    
-    public Receipt GetReceiptByTransactionId(Guid transactionId)
+
+    public ReceiptDto GetReceiptByTransactionId(Guid transactionId)
     {
         if (_context.Transactions
             .Include("Account")
@@ -64,9 +64,21 @@ public class ReceiptService : IReceiptService
         {
             throw new NotFoundTransactionException();
         }
-    
-        return _context.Transactions
+        
+
+        var imageData = _context.Transactions
+            .Include("Account")
+            .Include("Receipt")
             .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
-            .Receipt;
+            .Receipt?.ImageData;
+        if (imageData.IsNullOrEmpty())
+        {
+            throw new NoReceiptOfTransactionException();
+        }
+        ReceiptDto receiptDto = new()
+        {
+            ImageDataBase64 = Convert.ToBase64String(imageData)
+        };
+        return receiptDto;
     }
 }
