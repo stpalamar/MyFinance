@@ -82,14 +82,14 @@ public class TransactionService : ITransactionService
             throw new NotFoundTransactionException();
         }
         
-        var dbExpense = _context.Transactions
+        var dbTransaction = _context.Transactions
             .Include("Account")
             .First(t => t.Account.User.Id == _user.Id && t.Id == transaction.Id);
 
-        dbExpense.Description = transaction.Description;
-        dbExpense.Date = transaction.Date;
-        dbExpense.Type = transaction.Type;
-        dbExpense.Amount = transaction.Amount;
+        dbTransaction.Description = transaction.Description;
+        dbTransaction.Date = transaction.Date;
+        dbTransaction.Type = transaction.Type;
+        dbTransaction.Amount = transaction.Amount;
 
         _context.SaveChanges();
 
