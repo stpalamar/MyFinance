@@ -7,7 +7,6 @@ using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Type = Infrastructure.Data.Models.Type;
 
 namespace ApplicationCore.Services;
 
