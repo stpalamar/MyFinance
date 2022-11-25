@@ -8,8 +8,9 @@ public interface ITransactionService
     TransactionDto GetTransactionById(Guid id);
     List<TransactionDto> GetTransactionsByAccountId(Guid accountId);
     TransactionDto AddTransaction(TransactionDto transaction);
-    
+
     TransactionDto UpdateTransaction(TransactionDto transaction);
-    
+
     void DeleteTransaction(Guid id);
+
 }

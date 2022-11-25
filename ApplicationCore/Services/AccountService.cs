@@ -1,15 +1,13 @@
-﻿using System.Globalization;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
-using ClosedXML.Excel;
 using Infrastructure;
 using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Type = Infrastructure.Data.Models.Type;
 
 namespace ApplicationCore.Services;
 
@@ -23,7 +21,7 @@ public class AccountService : IAccountService
     {
         _context = context;
         var email = httpContextAccessor.HttpContext.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         _user = _context.Users.First(u => u.Email == email);
     }
     
@@ -92,5 +90,26 @@ public class AccountService : IAccountService
         _context.Accounts
             .Remove(_context.Accounts.First(t => t.User.Id == _user.Id && t.Id == id));
         _context.SaveChanges();
+    }
+    
+    public void CalculateAccountAmount(ApplicationDbContext context, User user)
+    {
+        var userTransactions = context.Transactions
+            .Include("Account")
+            .Where(t => t.Account.User.Id == user.Id)
+            .ToList();
+
+        context.Accounts
+            .Where(a => a.User.Id == user.Id)
+            .ToList()
+            .ForEach(a =>
+            {
+                a.Amount = a.InitialAmount;
+                a.Amount = userTransactions
+                    .Where(t => t.Account.Id == a.Id)
+                    .Sum(t => t.Type == Type.Income ? t.Amount : -t.Amount);
+            });
+        
+        context.SaveChanges();
     }
 }

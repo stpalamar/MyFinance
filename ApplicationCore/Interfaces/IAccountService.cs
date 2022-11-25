@@ -1,4 +1,7 @@
 ﻿using ApplicationCore.DTO;
+using DocumentFormat.OpenXml.InkML;
+using Infrastructure;
+using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApplicationCore.Interfaces;
@@ -10,4 +13,5 @@ public interface IAccountService
     AccountDto AddAccount(AccountDto account);
     AccountDto UpdateAccount(AccountDto account);
     void DeleteAccount(Guid id);
+    void CalculateAccountAmount(ApplicationDbContext context, User user);
 }

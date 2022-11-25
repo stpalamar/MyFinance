@@ -15,13 +15,16 @@ namespace ApplicationCore.Services;
 public class ImportExportService : IImportExportService
 {
     private ApplicationDbContext _context;
+    private IAccountService _accountService;
     private readonly User _user;
 
-    public ImportExportService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+    public ImportExportService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, 
+        IAccountService accountService)
     {
         _context = context;
+        _accountService = accountService;
         var email = httpContextAccessor.HttpContext.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         _user = _context.Users.First(u => u.Email == email);
     }
 
@@ -53,7 +56,7 @@ public class ImportExportService : IImportExportService
             _context.Transactions.Add(transaction);
             _context.SaveChanges();
         }
-        
+        _accountService.CalculateAccountAmount(_context, _user);
         return (AccountDto)account;
     }
 

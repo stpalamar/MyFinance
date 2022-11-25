@@ -19,7 +19,7 @@ public class ReceiptService : IReceiptService
     {
         _context = context;
         var email = httpContextAccessor.HttpContext.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         _user = _context.Users.First(u => u.Email == email);
     }
 

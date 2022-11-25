@@ -2,6 +2,7 @@
 using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
+using DocumentFormat.OpenXml.InkML;
 using Infrastructure;
 using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Http;
@@ -14,13 +15,15 @@ namespace ApplicationCore.Services;
 public class TransactionService : ITransactionService
 {
     private ApplicationDbContext _context;
+    private IAccountService _accountService;
     private readonly User _user;
 
-    public TransactionService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
+    public TransactionService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor, IAccountService accountService)
     {
         _context = context;
+        _accountService = accountService;
         var email = httpContextAccessor.HttpContext.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.Email).Value;
+            .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         _user = _context.Users.First(u => u.Email == email);
     }
 
@@ -85,7 +88,7 @@ public class TransactionService : ITransactionService
         _context.Transactions.Add(newTransaction);
         _context.SaveChanges();
 
-        CalculateAccountAmount();
+        _accountService.CalculateAccountAmount(_context, _user);
         return (TransactionDto)newTransaction;
     }
 
@@ -108,7 +111,7 @@ public class TransactionService : ITransactionService
 
         _context.SaveChanges();
 
-        CalculateAccountAmount();
+        _accountService.CalculateAccountAmount(_context, _user);
         return transaction;
     }
 
@@ -123,27 +126,6 @@ public class TransactionService : ITransactionService
         _context.Transactions
             .Remove(_context.Transactions.First(t => t.Account.User.Id == _user.Id && t.Id == id));
         _context.SaveChanges();
-        CalculateAccountAmount();
-    }
-
-    private void CalculateAccountAmount()
-    {
-        var userTransactions = _context.Transactions
-            .Include("Account")
-            .Where(t => t.Account.User.Id == _user.Id)
-            .ToList();
-
-        _context.Accounts
-            .Where(a => a.User.Id == _user.Id)
-            .ToList()
-            .ForEach(a =>
-            {
-                a.Amount = a.InitialAmount;
-                a.Amount = userTransactions
-                    .Where(t => t.Account.Id == a.Id)
-                    .Sum(t => t.Type == Type.Income ? t.Amount : -t.Amount);
-            });
-        
-        _context.SaveChanges();
+        _accountService.CalculateAccountAmount(_context, _user);
     }
 }
