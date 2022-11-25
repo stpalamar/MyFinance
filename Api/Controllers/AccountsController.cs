@@ -1,4 +1,5 @@
-﻿using ApplicationCore.DTO;
+﻿using System.Globalization;
+using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -48,4 +49,14 @@ public class AccountsController : ControllerBase
         _accountService.DeleteAccount(id);
         return Ok();
     }
+
+    // [HttpGet("ExportAccountToExcel/{id}")]
+    // public IActionResult ExportAccountToExcel(Guid id)
+    // {
+    //     var content = _accountService.ExportAccountToExcel(id);
+    //     return File(
+    //         content, 
+    //         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", 
+    //         $"Transactions {DateTime.Now:dd/MM/yyyy HH:mm:ss}.xlsx");
+    // }
 }

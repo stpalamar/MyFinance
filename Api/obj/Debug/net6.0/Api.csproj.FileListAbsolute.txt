@@ -174,3 +174,10 @@ D:\Development\rider-projects\MyFinance\Api\obj\Debug\net6.0\refint\Api.dll
 D:\Development\rider-projects\MyFinance\Api\obj\Debug\net6.0\Api.pdb
 D:\Development\rider-projects\MyFinance\Api\obj\Debug\net6.0\Api.genruntimeconfig.cache
 D:\Development\rider-projects\MyFinance\Api\obj\Debug\net6.0\ref\Api.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\ClosedXML.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\ExcelNumberFormat.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\Irony.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\SixLabors.Fonts.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\System.IO.Packaging.dll
+D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\XLParser.dll

@@ -45,6 +45,21 @@ public class TransactionService : ITransactionService
             .Select(t => (TransactionDto)t)
             .First();
     }
+    
+    public List<TransactionDto> GetTransactionsByAccountId(Guid accountId)
+    {
+        if (_context.Accounts
+            .Where(a => a.User.Id == _user.Id && a.Id == accountId)
+            .IsNullOrEmpty())
+        {
+            throw new NotFoundAccountException();
+        }
+        return _context.Transactions
+            .Include("Account")
+            .Where(t => t.Account.User.Id == _user.Id && t.Account.Id == accountId)
+            .Select(t => (TransactionDto)t)
+            .ToList();
+    }
 
     public TransactionDto AddTransaction(TransactionDto transaction)
     {

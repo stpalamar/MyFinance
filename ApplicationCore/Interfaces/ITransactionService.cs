@@ -6,7 +6,7 @@ public interface ITransactionService
 {
     List<TransactionDto> GetTransactions();
     TransactionDto GetTransactionById(Guid id);
-    
+    List<TransactionDto> GetTransactionsByAccountId(Guid accountId);
     TransactionDto AddTransaction(TransactionDto transaction);
     
     TransactionDto UpdateTransaction(TransactionDto transaction);

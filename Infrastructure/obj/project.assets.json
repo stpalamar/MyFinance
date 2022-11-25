@@ -3515,11 +3515,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Stanislav\\.nuget\\packages\\",
-      "outputPath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\obj\\",
+      "outputPath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Stanislav\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3577,7 +3577,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
       }
     }
   }

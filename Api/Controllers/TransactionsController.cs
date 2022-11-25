@@ -29,6 +29,12 @@ public class TransactionsController : ControllerBase
         return Ok(_transactionService.GetTransactionById(id));
     }
 
+    [HttpGet("Account/{id}")]
+    public IActionResult GetTransactionByAccountId(Guid id)
+    {
+        return Ok(_transactionService.GetTransactionsByAccountId(id));
+    }
+
     [HttpPost]
     public IActionResult AddTransaction(TransactionDto transaction)
     {
