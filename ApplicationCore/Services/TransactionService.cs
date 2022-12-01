@@ -129,4 +129,23 @@ public class TransactionService : ITransactionService
         _context.SaveChanges();
         _accountService.CalculateAccountAmount(_context, _user);
     }
+
+    public TransactionDto DuplicateTransaction(Guid id)
+    {
+        if (_context.Transactions
+            .Include("Account")
+            .Where(t => t.Account.User.Id == _user.Id && t.Id == id).IsNullOrEmpty())
+        {
+            throw new NotFoundTransactionException();
+        }
+
+        var transaction = _context.Transactions
+            .Include("Account")
+            .Include("Receipt")
+            .First(t => t.Account.User.Id == _user.Id && t.Id == id);
+        var clone = (Transaction)transaction.Clone();
+        _context.Transactions.Add(clone);
+        _context.SaveChanges();
+        return (TransactionDto)clone;
+    }
 }

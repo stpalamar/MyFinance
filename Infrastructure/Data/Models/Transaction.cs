@@ -9,7 +9,7 @@ public enum Type
     Income
 }
 
-public class Transaction
+public class Transaction : ICloneable
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public Guid Id { get; set; }
@@ -28,4 +28,19 @@ public class Transaction
     
     [ForeignKey("PaymentId")]
     public Payment? Payment { get; set; }
+
+    public object Clone()
+    {
+        var clone = new Transaction()
+        {
+            Description = new string(Description),
+            Date = Date,
+            Type = Type,
+            Amount = Amount,
+            Account = Account,
+            Receipt = Receipt,
+            Payment = null
+        };
+        return clone;
+    }
 }

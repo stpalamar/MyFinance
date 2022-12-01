@@ -54,5 +54,11 @@ public class TransactionsController : ControllerBase
         _transactionService.DeleteTransaction(id);
         return Ok();
     }
-    
+
+    [HttpPut("{id}")]
+    public IActionResult DuplicateTransaction(Guid id)
+    {
+        var cloned = _transactionService.DuplicateTransaction(id);
+        return CreatedAtRoute("GetTransaction", new { id = cloned.Id }, cloned);
+    }
 }

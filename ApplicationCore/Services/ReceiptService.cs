@@ -100,9 +100,22 @@ public class ReceiptService : IReceiptService
         {
             throw new NotFoundTransactionReceiptException();
         }
+
+        var receipt = transaction.Receipt;
         
-        _context.Receipts.Remove(transaction.Receipt);
         transaction.Receipt = null;
         _context.SaveChanges();
+
+        if (_context.Transactions
+            .Include("Account")
+            .Include("Receipt")
+            .Where(t => t.Receipt != null 
+                        && t.Account.User.Id == _user.Id 
+                        && t.Receipt.Id == receipt.Id)
+            .IsNullOrEmpty())
+        {
+            _context.Receipts.Remove(receipt);
+            _context.SaveChanges();
+        }
     }
 }

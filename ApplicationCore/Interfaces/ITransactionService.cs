@@ -12,5 +12,5 @@ public interface ITransactionService
     TransactionDto UpdateTransaction(TransactionDto transaction);
 
     void DeleteTransaction(Guid id);
-
+    TransactionDto DuplicateTransaction(Guid id);
 }
