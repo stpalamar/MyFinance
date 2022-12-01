@@ -22,39 +22,6 @@ public class ReceiptService : IReceiptService
             .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
         _user = _context.Users.First(u => u.Email == email);
     }
-
-    public void AddReceiptToTransaction(ReceiptUploadDto receiptUploadDto, Guid transactionId)
-    {
-        if (_context.Transactions
-            .Include("Account")
-            .Where(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
-            .IsNullOrEmpty())
-        {
-            throw new NotFoundTransactionException();
-        }
-
-        if (receiptUploadDto.ImageData.Length <= 0)
-        {
-            throw new Exception("File is empty");
-        }
-
-        ;
-        using var ms = new MemoryStream();
-        {
-            receiptUploadDto.ImageData.CopyTo(ms);
-            var fileBytes = ms.ToArray();
-            var newReceipt = new Receipt()
-            {
-                ImageData = fileBytes,
-            };
-            var addedReceipt = _context.Receipts.Add(newReceipt);
-            var transaction = _context.Transactions
-                .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
-                .Receipt = addedReceipt.Entity;
-            _context.SaveChanges();
-        }
-    }
-
     public ReceiptDto GetReceiptByTransactionId(Guid transactionId)
     {
         if (_context.Transactions
@@ -80,5 +47,62 @@ public class ReceiptService : IReceiptService
             ImageDataBase64 = Convert.ToBase64String(imageData)
         };
         return receiptDto;
+    }
+    
+    public void AddReceiptToTransaction(ReceiptUploadDto receiptUploadDto, Guid transactionId)
+    {
+        if (_context.Transactions
+            .Include("Account")
+            .Where(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
+            .IsNullOrEmpty())
+        {
+            throw new NotFoundTransactionException();
+        }
+
+        if (receiptUploadDto.ImageData.Length <= 0)
+        {
+            throw new Exception("File is empty");
+        }
+
+        ;
+        using var ms = new MemoryStream();
+        {
+            receiptUploadDto.ImageData.CopyTo(ms);
+            var fileBytes = ms.ToArray();
+            var newReceipt = new Receipt()
+            {
+                ImageData = fileBytes,
+            };
+            var addedReceipt = _context.Receipts.Add(newReceipt);
+            _context.Transactions
+                .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
+                .Receipt = addedReceipt.Entity;
+            _context.SaveChanges();
+        }
+    }
+
+    public void DeleteReceiptFromTransaction(Guid transactionId)
+    {
+        if (_context.Transactions
+            .Include("Account")
+            .Where(t => t.Account.User.Id == _user.Id && t.Id == transactionId)
+            .IsNullOrEmpty())
+        {
+            throw new NotFoundTransactionException();
+        }
+
+        var transaction = _context.Transactions
+            .Include("Account")
+            .Include("Receipt")
+            .First(t => t.Account.User.Id == _user.Id && t.Id == transactionId);
+        
+        if (transaction.Receipt == null)
+        {
+            throw new NotFoundTransactionReceiptException();
+        }
+        
+        _context.Receipts.Remove(transaction.Receipt);
+        transaction.Receipt = null;
+        _context.SaveChanges();
     }
 }

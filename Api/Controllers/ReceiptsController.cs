@@ -19,6 +19,12 @@ public class ReceiptsController : ControllerBase
         _receiptService = receiptService;
     }
     
+    [HttpGet("{id}")]
+    public IActionResult GetReceiptByTransactionId(Guid id)
+    {
+        return Ok(_receiptService.GetReceiptByTransactionId(id));
+    }
+    
     [HttpPost("{id}")]
     public IActionResult AddReceiptToTransaction([FromForm] ReceiptUploadDto receiptUploadDto, Guid id)
     {
@@ -26,9 +32,10 @@ public class ReceiptsController : ControllerBase
         return Ok();
     }
     
-    [HttpGet("{id}")]
-    public IActionResult GetReceiptByTransactionId(Guid id)
+    [HttpDelete("{id}")]
+    public IActionResult DeleteReceiptFromTransaction(Guid id)
     {
-        return Ok(_receiptService.GetReceiptByTransactionId(id));
+        _receiptService.DeleteReceiptFromTransaction(id);
+        return Ok();
     }
 }

@@ -31,6 +31,7 @@ public class TransactionService : ITransactionService
     {
         return _context.Transactions
             .Include("Account")
+            .Include("Receipt")
             .Where(t => t.Account.User.Id == _user.Id)
             .Select(t => (TransactionDto)t)
             .ToList();
