@@ -1,7 +1,6 @@
-﻿using System.Net;
+﻿using Api.Authorization;
 using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

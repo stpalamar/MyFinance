@@ -1,6 +1,5 @@
 ﻿using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
-using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;

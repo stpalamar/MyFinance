@@ -22,10 +22,11 @@ public class ImportExportService : IImportExportService
         IAccountService accountService)
     {
         _context = context;
-        _accountService = accountService;
-        var email = httpContextAccessor.HttpContext.User.Claims
-            .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-        _user = _context.Users.First(u => u.Email == email);
+        // _accountService = accountService;
+        // var email = httpContextAccessor.HttpContext.User.Claims
+        //     .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+        // _user = _context.Users.First(u => u.Email == email);
+        _user = (httpContextAccessor.HttpContext.Items["User"] as User)!;
     }
 
     public AccountDto ImportTransactions(IFormFile excelFile)

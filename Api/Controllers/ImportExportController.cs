@@ -1,5 +1,5 @@
-﻿using ApplicationCore.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+﻿using Api.Authorization;
+using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers;
