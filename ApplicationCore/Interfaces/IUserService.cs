@@ -5,7 +5,9 @@ namespace ApplicationCore.Interfaces;
 
 public interface IUserService
 {
-    Task<AuthenticatedUserDto> SignUp(User user);
-    Task<AuthenticatedUserDto> SignIn(LoginDto user);
+    Task<User> GetUserByEmail(string email);
+    Task<AuthenticatedUserDto> SignUp(User user, string ipAddress);
+    Task<AuthenticatedUserDto> SignIn(LoginDto user, string ipAddress);
+    Task<AuthenticatedUserDto> RefreshToken(string token, string ipAddress);
     
 }

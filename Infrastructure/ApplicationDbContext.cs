@@ -8,6 +8,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Account> Accounts { get; set; } = null!;
     public DbSet<Payment> Payments { get; set; } = null!;
     public DbSet<Receipt> Receipts { get; set; } = null!;
+    public DbSet<RefreshToken> RefreshTokens { get; set; } = null!;
     public DbSet<User> Users { get; set; } = null!;
     public DbSet<Transaction> Transactions { get; set; } = null!;
     
