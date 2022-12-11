@@ -63,6 +63,10 @@ public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger)
                     problem.Status = (int)HttpStatusCode.NotFound;
                     problem.Title = "Transaction does not have a receipt";
                     break;
+                case InvalidTokenException _:
+                    problem.Status = (int)HttpStatusCode.Unauthorized;
+                    problem.Title = "Invalid token";
+                    break;
             }
 
             string json = JsonSerializer.Serialize(problem);

@@ -17,7 +17,7 @@ public class AuthenticationController : ControllerBase
     }
 
     [HttpPost("signup")]
-    public async Task<IActionResult> SignUp(User user)
+    public async Task<IActionResult> SignUp(RegisterDto user)
     {
         var response = await _userService.SignUp(user, ipAddress());
         SetTokenCookie(response.RefreshToken);
@@ -28,25 +28,23 @@ public class AuthenticationController : ControllerBase
     [HttpPost("signin")]
     public async Task<IActionResult> SignIn(LoginDto user)
     {
-        var result = await _userService.SignIn(user, ipAddress());
-        // HttpContext.Response.Cookies.Append("token", result.Token,
-        //     new CookieOptions
-        //     {
-        //         Expires = DateTime.Now.AddDays(1),
-        //         HttpOnly = true,
-        //         Secure = true,
-        //         IsEssential = true,
-        //         SameSite = SameSiteMode.None
-        //     });
-        return Ok(result);
+        var response = await _userService.SignIn(user, ipAddress());
+        SetTokenCookie(response.RefreshToken);
+        response.RefreshToken = null;
+        return Ok(response);
     }
     
     [HttpPost("refresh")]
     public async Task<IActionResult> RefreshToken()
     {
-        return Ok();
+        var refreshToken = Request.Cookies["refreshToken"];
+        var response = await _userService.RefreshToken(refreshToken!, ipAddress());
+        SetTokenCookie(response.RefreshToken!);
+        response.RefreshToken = null;
+        return Ok(response);
     }
-    
+
+    // helper methods
     private string ipAddress()
     {
         // get source ip address for the current request
@@ -57,7 +55,6 @@ public class AuthenticationController : ControllerBase
     }
     
     
-    // helper methods
     private void SetTokenCookie(string token)
     {
         // append cookie with refresh token to the http response

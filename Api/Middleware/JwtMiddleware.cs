@@ -19,7 +19,7 @@ public class JwtMiddleware
         if (email != null)
         {
             // attach user to context on successful jwt validation
-            context.Items["User"] = userService.GetUserByEmail(email);
+            context.Items["User"] = await userService.GetUserByEmail(email);
         }
 
         await _next(context);

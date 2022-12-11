@@ -15,5 +15,6 @@ public class User
     public string LastName { get; set; } = null!;
     [MaxLength(100)]
     public string Password { get; set; } = null!;
-    public List<RefreshToken> RefreshTokens { get; set; }
+
+    public virtual List<RefreshToken> RefreshTokens { get; set; } = new List<RefreshToken>();
 }

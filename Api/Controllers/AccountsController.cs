@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using ApplicationCore.DTO;
+﻿using ApplicationCore.DTO;
 using ApplicationCore.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

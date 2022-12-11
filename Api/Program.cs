@@ -82,8 +82,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(myAllowSpecificOrigins);
-app.UseAuthentication();
-app.UseAuthorization();
 app.UseMiddleware<JwtMiddleware>();
 app.UseMiddleware<ErrorHandlingMiddleware>();
 app.MapControllers();
