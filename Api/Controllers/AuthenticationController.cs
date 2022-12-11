@@ -33,11 +33,11 @@ public class AuthenticationController : ControllerBase
         return Ok(response);
     }
     
-    [HttpPost("refresh")]
+    [HttpGet("refresh")]
     public async Task<IActionResult> RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
-        var response = await _userService.RefreshToken(refreshToken!, ipAddress());
+        var response = await _userService.RefreshToken(refreshToken, ipAddress());
         SetTokenCookie(response.RefreshToken!);
         response.RefreshToken = null;
         return Ok(response);
