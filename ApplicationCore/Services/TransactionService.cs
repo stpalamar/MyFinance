@@ -105,11 +105,15 @@ public class TransactionService : ITransactionService
         var dbTransaction = _context.Transactions
             .Include("Account")
             .First(t => t.Account.User.Id == _user.Id && t.Id == transaction.Id);
+        
+        var dbAccount = _context.Accounts
+            .First(a => a.User.Id == _user.Id && a.Id == transaction.AccountId);
 
         dbTransaction.Description = transaction.Description;
         dbTransaction.Date = transaction.Date;
         dbTransaction.Type = transaction.Type;
         dbTransaction.Amount = transaction.Amount;
+        dbTransaction.Account = dbAccount;
 
         _context.SaveChanges();
 

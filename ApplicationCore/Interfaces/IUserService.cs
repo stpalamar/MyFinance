@@ -9,5 +9,5 @@ public interface IUserService
     Task<AuthenticatedUserDto> SignUp(RegisterDto user, string ipAddress);
     Task<AuthenticatedUserDto> SignIn(LoginDto user, string ipAddress);
     Task<AuthenticatedUserDto> RefreshToken(string token, string ipAddress);
-    
+    Task RevokeToken(string token, string ipAddress); 
 }

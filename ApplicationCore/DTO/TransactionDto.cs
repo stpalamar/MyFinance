@@ -11,6 +11,8 @@ public class TransactionDto
     public Type Type { get; set; }
     public double Amount { get; set; }
     public Guid AccountId { get; set; }
+    
+    public string? AccountName { get; set; }
     public Guid? ReceiptId { get; set; }
 
     public static explicit operator TransactionDto(Transaction t) => new TransactionDto
@@ -21,6 +23,7 @@ public class TransactionDto
         Type = t.Type,
         Amount = t.Amount,
         AccountId = t.Account.Id,
+        AccountName = t.Account.Name,
         ReceiptId = t.Receipt?.Id
     };
 }

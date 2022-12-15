@@ -56,7 +56,7 @@ public class UserService : IUserService
         newUser.RefreshTokens.Add(refreshToken);
         await _context.Users.AddAsync(newUser);
 
-        // RemoveOldRefreshTokens(newUser);
+        RemoveOldRefreshTokens(newUser);
 
         await _context.SaveChangesAsync();
 
@@ -72,18 +72,22 @@ public class UserService : IUserService
 
     public async Task<AuthenticatedUserDto> SignIn(LoginDto user, string ipAddress)
     {
-        var dbUser = await _context.Users.FirstOrDefaultAsync(u => u.Email == user.Email);
+        var dbUser = await _context.Users.Include("RefreshTokens").FirstOrDefaultAsync(u => u.Email == user.Email);
 
         if (dbUser == null || _passwordHasher
                 .VerifyHashedPassword(dbUser.Password, user.Password) == PasswordVerificationResult.Failed)
         {
             throw new InvalidEmailPasswordException();
         }
-
+        if (dbUser.RefreshTokens.Any(rt => rt.IsActive))
+        {
+            var activateRefreshToken = dbUser.RefreshTokens.Find(r => r.IsActive).Token;
+            await RevokeToken(activateRefreshToken, ipAddress);
+        }
         var jwtToken = _jwtUtils.GenerateJwtToken(dbUser.Email, dbUser.FirstName, dbUser.LastName);
         var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
         dbUser.RefreshTokens.Add(refreshToken);
-
+        
         RemoveOldRefreshTokens(dbUser);
 
         await _context.SaveChangesAsync();
@@ -107,7 +111,7 @@ public class UserService : IUserService
         {
             // revoke all descendant tokens in case this token has been compromised
             RevokeDescendantRefreshTokens(refreshToken, ipAddress,
-                $"Attempted reuse of revoked ancestor token: {token}");
+                $"New login: {token}");
             _context.Update(user);
             await _context.SaveChangesAsync();
         }
@@ -139,7 +143,7 @@ public class UserService : IUserService
         };
     }
 
-    public void RevokeToken(string token, string ipAddress)
+    public async Task RevokeToken(string token, string ipAddress)
     {
         var refreshToken = _context.RefreshTokens.Single(x => x.Token == token);
 
@@ -149,7 +153,7 @@ public class UserService : IUserService
         // revoke token and save
         RevokeRefreshToken(refreshToken, ipAddress, "Revoked without replacement");
         _context.Update(refreshToken);
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 
 

@@ -42,6 +42,19 @@ public class AuthenticationController : ControllerBase
         response.RefreshToken = null;
         return Ok(response);
     }
+    
+    [HttpGet("logout")]
+    public async Task<IActionResult> RevokeToken()
+    {
+        // accept refresh token in request body or cookie
+        var token = Request.Cookies["refreshToken"];
+
+        if (string.IsNullOrEmpty(token))
+            return BadRequest(new { message = "Token is required" });
+
+        await _userService.RevokeToken(token, ipAddress());
+        return Ok(new { message = "Token revoked" });
+    }
 
     // helper methods
     private string ipAddress()
@@ -60,9 +73,8 @@ public class AuthenticationController : ControllerBase
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Secure = true,
             IsEssential = true,
-            SameSite = SameSiteMode.None,
+            SameSite = SameSiteMode.Lax,
             Expires = DateTime.UtcNow.AddDays(7)
         };
         Response.Cookies.Append("refreshToken", token, cookieOptions);

@@ -79,7 +79,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
+// app.UseHttpsRedirection();
 app.UseRouting();
 app.UseCors(myAllowSpecificOrigins);
 app.UseMiddleware<JwtMiddleware>();
