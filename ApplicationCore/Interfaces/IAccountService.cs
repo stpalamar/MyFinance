@@ -2,7 +2,6 @@
 using DocumentFormat.OpenXml.InkML;
 using Infrastructure;
 using Infrastructure.Data.Models;
-using Microsoft.AspNetCore.Mvc;
 
 namespace ApplicationCore.Interfaces;
 
