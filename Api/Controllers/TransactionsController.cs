@@ -29,7 +29,7 @@ public class TransactionsController : ControllerBase
         return Ok(_transactionService.GetTransactionById(id));
     }
 
-    [HttpGet("Account/{id}")]
+    [HttpGet("account/{id}")]
     public IActionResult GetTransactionByAccountId(Guid id)
     {
         return Ok(_transactionService.GetTransactionsByAccountId(id));

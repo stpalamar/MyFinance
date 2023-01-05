@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System.Runtime.Loader;
+using System.Security.Claims;
 using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
@@ -53,7 +54,7 @@ public class AccountService : IAccountService
         {
             Name = account.Name,
             InitialAmount = account.InitialAmount,
-            Amount = account.Amount,
+            Amount = account.InitialAmount,
             User = _user
         };
         _context.Accounts.Add(newAccount);
@@ -71,12 +72,14 @@ public class AccountService : IAccountService
         
         var dbAccount = _context.Accounts
             .First(a => a.User.Id == _user.Id && a.Id == account.Id);
-
+        
         dbAccount.Name = account.Name;
         dbAccount.InitialAmount = account.InitialAmount;
         dbAccount.Amount = account.Amount;
         
+        
         _context.SaveChanges();
+        CalculateAccountAmount(_context, _user);
         return account;
     }
 
@@ -99,7 +102,9 @@ public class AccountService : IAccountService
             .Include("Account")
             .Where(t => t.Account.User.Id == user.Id)
             .ToList();
-
+        var accounts = _context.Accounts
+            .Where(a => a.User.Id == user.Id)
+            .ToList();
         context.Accounts
             .Where(a => a.User.Id == user.Id)
             .ToList()
