@@ -1,13 +1,9 @@
-using System.Text;
 using Api.Middleware;
 using ApplicationCore.Interfaces;
 using ApplicationCore.Services;
 using ApplicationCore.Utilities;
 using Infrastructure;
-using Infrastructure.Data;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 
 const string myAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
@@ -31,7 +27,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddTransient<DataSeed>();
 builder.Services.AddDbContext<ApplicationDbContext>();
 builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddTransient<IJwtUtils, JwtUtils>();
@@ -45,33 +40,7 @@ builder.Services.AddTransient<IPasswordHasher, PasswordHasher>();
 builder.Services.AddLogging();
 builder.Services.AddTransient<ErrorHandlingMiddleware>();
 
-// var secret = Environment.GetEnvironmentVariable("JWT_SECRET");
-// var issuer = Environment.GetEnvironmentVariable("JWT_ISSUER");
-//
-// builder.Services.AddAuthentication(opts =>
-//     {
-//         opts.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//         opts.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//     })
-//     .AddJwtBearer(opts =>
-//     {
-//         opts.TokenValidationParameters = new TokenValidationParameters
-//         {
-//             ValidateIssuerSigningKey = true,
-//             ValidIssuer = issuer,
-//             ValidateAudience = false,
-//             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret))
-//         };
-//     });
-
 var app = builder.Build();
-
-
-using (var scope = app.Services.CreateScope())
-{
-    var scopedProvider = scope.ServiceProvider.GetService<DataSeed>();
-    scopedProvider?.Seed();
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
