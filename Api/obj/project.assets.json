@@ -7748,11 +7748,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Development\\rider-projects\\MyFinance\\Api\\Api.csproj",
+      "projectUniqueName": "E:\\Development\\dotnet-projects\\MyFinance\\Api\\Api.csproj",
       "projectName": "Api",
-      "projectPath": "D:\\Development\\rider-projects\\MyFinance\\Api\\Api.csproj",
+      "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\Api\\Api.csproj",
       "packagesPath": "C:\\Users\\Stanislav\\.nuget\\packages\\",
-      "outputPath": "D:\\Development\\rider-projects\\MyFinance\\Api\\obj\\",
+      "outputPath": "E:\\Development\\dotnet-projects\\MyFinance\\Api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Stanislav\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -7767,11 +7767,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj": {
-              "projectPath": "D:\\Development\\rider-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj"
+            "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj": {
+              "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\ApplicationCore\\ApplicationCore.csproj"
             },
-            "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\Development\\rider-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj"
+            "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "E:\\Development\\dotnet-projects\\MyFinance\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -7820,7 +7820,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   },

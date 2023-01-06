@@ -181,3 +181,10 @@ D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\Irony.dll
 D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\SixLabors.Fonts.dll
 D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\System.IO.Packaging.dll
 D:\Development\rider-projects\MyFinance\Api\bin\Debug\net6.0\XLParser.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\ClosedXML.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\DocumentFormat.OpenXml.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\ExcelNumberFormat.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\Irony.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\SixLabors.Fonts.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\System.IO.Packaging.dll
+E:\Development\dotnet-projects\MyFinance\Api\bin\Debug\net6.0\XLParser.dll

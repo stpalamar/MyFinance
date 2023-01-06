@@ -21,9 +21,6 @@ public class AccountService : IAccountService
     public AccountService(ApplicationDbContext context, IHttpContextAccessor httpContextAccessor)
     {
         _context = context;
-        // var email = httpContextAccessor.HttpContext.User.Claims
-        //     .FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
-        // _user = _context.Users.First(u => u.Email == email);
         _user = (httpContextAccessor.HttpContext.Items["User"] as User)!;
     }
     
