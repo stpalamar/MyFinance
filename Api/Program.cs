@@ -34,6 +34,7 @@ builder.Services.AddTransient<ITransactionService, TransactionService>();
 builder.Services.AddTransient<IUserService, UserService>();
 builder.Services.AddTransient<IReceiptService, ReceiptService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IDepositService, DepositService>();
 builder.Services.AddTransient<IPaymentService, PaymentService>();
 builder.Services.AddTransient<IImportExportService, ImportExportService>();
 builder.Services.AddTransient<IPasswordHasher, PasswordHasher>();

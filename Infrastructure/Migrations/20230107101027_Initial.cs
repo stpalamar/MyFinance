@@ -60,6 +60,30 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Deposits",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    InitialDeposit = table.Column<double>(type: "float", nullable: false),
+                    MonthlyContribution = table.Column<double>(type: "float", nullable: false),
+                    InterestRate = table.Column<double>(type: "float", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Months = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Deposits", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Deposits_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RefreshTokens",
                 columns: table => new
                 {
@@ -151,6 +175,11 @@ namespace Infrastructure.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Deposits_UserId",
+                table: "Deposits",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Payments_AccountId",
                 table: "Payments",
                 column: "AccountId");
@@ -179,6 +208,9 @@ namespace Infrastructure.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Deposits");
+
             migrationBuilder.DropTable(
                 name: "RefreshTokens");
 

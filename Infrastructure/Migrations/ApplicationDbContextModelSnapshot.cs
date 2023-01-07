@@ -49,6 +49,41 @@ namespace Infrastructure.Migrations
                     b.ToTable("Accounts");
                 });
 
+            modelBuilder.Entity("Infrastructure.Data.Models.Deposit", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("InitialDeposit")
+                        .HasColumnType("float");
+
+                    b.Property<double>("InterestRate")
+                        .HasColumnType("float");
+
+                    b.Property<double>("MonthlyContribution")
+                        .HasColumnType("float");
+
+                    b.Property<int>("Months")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Deposits");
+                });
+
             modelBuilder.Entity("Infrastructure.Data.Models.Payment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -222,6 +257,17 @@ namespace Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("Infrastructure.Data.Models.Account", b =>
+                {
+                    b.HasOne("Infrastructure.Data.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Infrastructure.Data.Models.Deposit", b =>
                 {
                     b.HasOne("Infrastructure.Data.Models.User", "User")
                         .WithMany()
