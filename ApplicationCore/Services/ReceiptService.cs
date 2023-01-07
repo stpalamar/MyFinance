@@ -42,7 +42,7 @@ public class ReceiptService : IReceiptService
         }
         ReceiptDto receiptDto = new()
         {
-            ImageDataBase64 = Convert.ToBase64String(imageData)
+            ImageDataBase64 = Convert.ToBase64String(imageData!)
         };
         return receiptDto;
     }

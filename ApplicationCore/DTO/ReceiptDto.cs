@@ -4,5 +4,5 @@ namespace ApplicationCore.DTO;
 
 public class ReceiptDto
 {
-    public string ImageDataBase64 { get; set; }
+    public string ImageDataBase64 { get; set; } = null!;
 }

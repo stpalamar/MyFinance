@@ -5,7 +5,7 @@ namespace ApplicationCore.DTO;
 public class DepositDto
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
     public double InitialDeposit { get; set; }
     public double MonthlyContribution { get; set; }
     public double InterestRate { get; set; }

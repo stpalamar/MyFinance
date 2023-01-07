@@ -191,7 +191,7 @@ public class UserService : IUserService
         if (!string.IsNullOrEmpty(refreshToken.ReplacedByToken))
         {
             var childToken = _context.RefreshTokens.SingleOrDefault(x => x.Token == refreshToken.ReplacedByToken);
-            if (childToken.IsActive)
+            if (childToken!.IsActive)
                 RevokeRefreshToken(childToken, ipAddress, reason);
             else
                 RevokeDescendantRefreshTokens(childToken, ipAddress, reason);

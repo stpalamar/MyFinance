@@ -18,8 +18,8 @@ public class AuthenticationController : ControllerBase
     [HttpPost("signup")]
     public async Task<IActionResult> SignUp(RegisterDto user)
     {
-        var response = await _userService.SignUp(user, ipAddress());
-        SetTokenCookie(response.RefreshToken);
+        var response = await _userService.SignUp(user, IpAddress());
+        SetTokenCookie(response.RefreshToken!);
         response.RefreshToken = null;
         return Ok(response);
     }
@@ -27,8 +27,8 @@ public class AuthenticationController : ControllerBase
     [HttpPost("signin")]
     public async Task<IActionResult> SignIn(LoginDto user)
     {
-        var response = await _userService.SignIn(user, ipAddress());
-        SetTokenCookie(response.RefreshToken);
+        var response = await _userService.SignIn(user, IpAddress());
+        SetTokenCookie(response.RefreshToken!);
         response.RefreshToken = null;
         return Ok(response);
     }
@@ -37,7 +37,7 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> RefreshToken()
     {
         var refreshToken = Request.Cookies["refreshToken"];
-        var response = await _userService.RefreshToken(refreshToken, ipAddress());
+        var response = await _userService.RefreshToken(refreshToken!, IpAddress());
         SetTokenCookie(response.RefreshToken!);
         response.RefreshToken = null;
         return Ok(response);
@@ -52,18 +52,18 @@ public class AuthenticationController : ControllerBase
         if (string.IsNullOrEmpty(token))
             return BadRequest(new { message = "Token is required" });
 
-        await _userService.RevokeToken(token, ipAddress());
+        await _userService.RevokeToken(token, IpAddress());
         return Ok(new { message = "Token revoked" });
     }
 
     // helper methods
-    private string ipAddress()
+    private string IpAddress()
     {
         // get source ip address for the current request
         if (Request.Headers.ContainsKey("X-Forwarded-For"))
-            return Request.Headers["X-Forwarded-For"];
+            return Request.Headers["X-Forwarded-For"]!;
         else
-            return HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+            return HttpContext.Connection.RemoteIpAddress!.MapToIPv4().ToString();
     }
     
     
