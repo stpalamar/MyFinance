@@ -26,9 +26,6 @@ public class Transaction : ICloneable
     [ForeignKey("ReceiptId")]
     public Receipt? Receipt { get; set; }
     
-    [ForeignKey("PaymentId")]
-    public Payment? Payment { get; set; }
-
     public object Clone()
     {
         var clone = new Transaction()
@@ -39,7 +36,6 @@ public class Transaction : ICloneable
             Amount = Amount,
             Account = Account,
             Receipt = Receipt,
-            Payment = null
         };
         return clone;
     }

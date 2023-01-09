@@ -23,7 +23,7 @@ public class DepositsController : ControllerBase
         return Ok(_depositService.GetDeposits());
     }
     
-    [HttpGet("{id}", Name = "GetAccount")]
+    [HttpGet("{id}", Name = "GetDeposit")]
     public IActionResult GetAccount(Guid id)
     {
         return Ok(_depositService.GetDepositById(id));
