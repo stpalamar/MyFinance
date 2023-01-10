@@ -1,14 +1,11 @@
-﻿using System.Security.Claims;
-using ApplicationCore.DTO;
+﻿using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
-using DocumentFormat.OpenXml.InkML;
 using Infrastructure;
 using Infrastructure.Data.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Type = Infrastructure.Data.Models.Type;
 
 namespace ApplicationCore.Services;
 
