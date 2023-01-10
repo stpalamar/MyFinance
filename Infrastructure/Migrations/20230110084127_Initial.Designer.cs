@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230107101027_Initial")]
+    [Migration("20230110084127_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -85,51 +85,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Deposits");
-                });
-
-            modelBuilder.Entity("Infrastructure.Data.Models.Payment", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("AccountId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<double>("Amount")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("FreqInterval")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FreqType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
-
-                    b.Property<int?>("NumberOfRepeats")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RepeatType")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Type")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Infrastructure.Data.Models.Receipt", b =>
@@ -208,9 +163,6 @@ namespace Infrastructure.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<Guid?>("PaymentId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("ReceiptId")
                         .HasColumnType("uniqueidentifier");
 
@@ -220,8 +172,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AccountId");
-
-                    b.HasIndex("PaymentId");
 
                     b.HasIndex("ReceiptId");
 
@@ -281,17 +231,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Infrastructure.Data.Models.Payment", b =>
-                {
-                    b.HasOne("Infrastructure.Data.Models.Account", "Account")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Account");
-                });
-
             modelBuilder.Entity("Infrastructure.Data.Models.RefreshToken", b =>
                 {
                     b.HasOne("Infrastructure.Data.Models.User", null)
@@ -307,17 +246,11 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Infrastructure.Data.Models.Payment", "Payment")
-                        .WithMany()
-                        .HasForeignKey("PaymentId");
-
                     b.HasOne("Infrastructure.Data.Models.Receipt", "Receipt")
                         .WithMany()
                         .HasForeignKey("ReceiptId");
 
                     b.Navigation("Account");
-
-                    b.Navigation("Payment");
 
                     b.Navigation("Receipt");
                 });
