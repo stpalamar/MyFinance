@@ -59,10 +59,6 @@ public ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger)
                     problem.Status = (int)HttpStatusCode.NotFound;
                     problem.Title = "Receipt not found";
                     break;
-                case NotFoundPaymentException _:
-                    problem.Status = (int)HttpStatusCode.NotFound;
-                    problem.Title = "Payment not found";
-                    break;
                 case NotFoundTransactionReceiptException _:
                     problem.Status = (int)HttpStatusCode.NotFound;
                     problem.Title = "Transaction does not have a receipt";
