@@ -3,7 +3,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
-using ApplicationCore.DTO;
 using Infrastructure;
 using Infrastructure.Data.Models;
 
@@ -27,7 +26,7 @@ public class JwtUtils : IJwtUtils
 
     public string GenerateJwtToken(string email, string firstName, string lastName)
     {
-        // generate token that is valid for 15 minutes
+        // generate token that is valid for 30 seconds
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_SECRET")!);
         var tokenDescriptor = new SecurityTokenDescriptor
@@ -58,7 +57,6 @@ public class JwtUtils : IJwtUtils
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                // set clockskew to zero so tokens expire exactly at token expiration time (instead of 5 minutes later)
                 ClockSkew = TimeSpan.Zero
             }, out SecurityToken validatedToken);
 
@@ -90,9 +88,7 @@ public class JwtUtils : IJwtUtils
 
         string getUniqueToken()
         {
-            // token is a cryptographically strong random sequence of values
             var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
-            // ensure token is unique by checking against db
             var tokenIsUnique = !_context.Users.Any(u => u.RefreshTokens.Any(t => t.Token == token));
 
             if (!tokenIsUnique)
