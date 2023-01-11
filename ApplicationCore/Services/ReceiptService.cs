@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using ApplicationCore.DTO;
+﻿using ApplicationCore.DTO;
 using ApplicationCore.Exceptions;
 using ApplicationCore.Interfaces;
 using Infrastructure;
